@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
-import VerUsers from "../components/Users/VerUsers";
-import LoginUsers from "../components/LoginUsers/LoginUsers";
-import FoodOrder from "../components/FoodOrder/FoodOrder";
-import VerBasicForm from "../components/BasicForm/VerBasicForm";
+import VerUsers from "../components/examples/Users/VerUsers";
+import LoginUsers from "../components/examples/LoginUsers/LoginUsers";
+import FoodOrder from "../components/examples/FoodOrder/FoodOrder";
+import VerBasicForm from "../components/examples/BasicForm/VerBasicForm";
 
 const MenuApps = () => {
   return (
