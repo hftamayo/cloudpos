@@ -7,7 +7,6 @@ const App = () => {
   return(
     <div>
       <h2>Cloud Pos</h2>
-      <p>Menu Principal</p>
       <MenuApps />
     </div>
 
