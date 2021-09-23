@@ -1,11 +1,14 @@
 import { useRef, useState } from "react";
-
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import classes from "./Checkout.module.css";
 
 const isEmpty = (value) => value.trim() === "";
 const isNotNineChars = (value) => value.trim().length !== 9;
 
 const Checkout = (props) => {
+  const paymentMethods = ["Cash", "Credit", "Crypto"];
+
   const [formInputsValidity, setFormInputsValidity] = useState({
     clientName: true,
     clientCellPhone: true,
@@ -74,18 +77,30 @@ const Checkout = (props) => {
     <form className={classes.form} onSubmit={ConfirmHandler}>
       <div className={nameControlClasses}>
         <label htmlFor="clientName">Client's Name</label>
-        <input type="text" id="clientName" ref={clientNameRef} />
+        <input
+          type="text"
+          id="clientName"
+          ref={clientNameRef}
+          value="Fred Flinstone"
+          readOnly
+        />
         {!formInputsValidity.clientName && <p>Please Enter a valid Name</p>}
       </div>
       <div className={phoneControlClasses}>
         <label htmlFor="clientCellPhone">Client's Cell Phone Number</label>
-        <input type="text" id="clientCellPhone" ref={clientCellPhoneRef} />
+        <input
+          type="text"
+          id="clientCellPhone"
+          ref={clientCellPhoneRef}
+          value="1234-7890"
+          readOnly
+        />
         {!formInputsValidity.clientCellPhone && (
           <p>Please Enter a 8 digits numbers</p>
         )}
       </div>
       <div className={delivAddressControlClasses}>
-        <label htmlFor="clientDelivAddress">Delivery Address</label>
+        <label htmlFor="clientDelivAddress">Delivery Address *</label>
         <input
           type="text"
           id="clientDelivAddress"
@@ -96,9 +111,26 @@ const Checkout = (props) => {
         )}
       </div>
       <div className={methodPaymentControlClasses}>
-        <label htmlFor="clientMethodPayment">Method of Payment</label>
-        <input type="text" id="clientMethodPayment" ref={clientMethodPaymentRef} />
-        {!formInputsValidity.clientName && (
+        <label htmlFor="clientMethodPayment">Method of Payment *</label>
+        <Autocomplete
+          options={paymentMethods}
+          style={{ width: 300 }}
+          renderInput={(params) => (
+            <TextField
+              id="cboClientMethodPayment"
+              {...params}
+              label="Choose one:"
+              variant="outlined"
+            />
+          )}
+        />
+
+        <input
+          type="text"
+          id="clientMethodPayment"
+          ref={clientMethodPaymentRef}
+        />
+        {!formInputsValidity.clientMethodPayment && (
           <p>Please choose a valid payment method</p>
         )}
       </div>
