@@ -13,14 +13,12 @@ const Checkout = (props) => {
     clientName: true,
     clientCellPhone: true,
     clientDelivAddress: true,
-    clientMethodPayment: true,
   });
 
   //estos objetos sirven para no capturar todos los keystrokes durante dataInput
   const clientNameRef = useRef();
   const clientCellPhoneRef = useRef();
   const clientDelivAddressRef = useRef();
-  const clientMethodPaymentRef = useRef();
 
   const ConfirmHandler = (event) => {
     event.preventDefault();
@@ -28,25 +26,21 @@ const Checkout = (props) => {
     const enteredName = clientNameRef.current.value;
     const enteredCellPhone = clientCellPhoneRef.current.value;
     const enteredDelivAddress = clientDelivAddressRef.current.value;
-    const enteredMethodPayment = clientMethodPaymentRef.current.value;
 
     const enteredNameIsValid = !isEmpty(enteredName);
     const enteredCellPhoneIsValid = !isNotNineChars(enteredCellPhone);
     const enteredDelivAddressIsValid = !isEmpty(enteredDelivAddress);
-    const enteredMethodPaymentIsValid = !isEmpty(enteredMethodPayment);
 
     setFormInputsValidity({
       clientName: enteredNameIsValid,
       clientCellPhone: enteredCellPhoneIsValid,
       clientDelivAddress: enteredDelivAddressIsValid,
-      clientMethodPayment: enteredMethodPaymentIsValid,
     });
 
     const formIsValid =
       enteredNameIsValid &&
       enteredCellPhoneIsValid &&
-      enteredDelivAddressIsValid &&
-      enteredMethodPaymentIsValid;
+      enteredDelivAddressIsValid;
 
     if (!formIsValid) {
       return;
@@ -56,7 +50,6 @@ const Checkout = (props) => {
       clientName: enteredName,
       clientCellPhone: enteredCellPhone,
       clientDelivAddress: enteredDelivAddress,
-      clientMethodPayment: enteredMethodPayment,
     });
   };
 
@@ -68,9 +61,6 @@ const Checkout = (props) => {
   }`;
   const delivAddressControlClasses = `${classes.control} ${
     formInputsValidity.clientDelivAddress ? "" : classes.invalid
-  }`;
-  const methodPaymentControlClasses = `${classes.control} ${
-    formInputsValidity.clientMethodPayment ? "" : classes.invalid
   }`;
 
   return (
@@ -110,29 +100,20 @@ const Checkout = (props) => {
           <p>Please Enter a valid address</p>
         )}
       </div>
-      <div className={methodPaymentControlClasses}>
+      <div>
         <label htmlFor="clientMethodPayment">Method of Payment *</label>
         <Autocomplete
           options={paymentMethods}
           style={{ width: 300 }}
           renderInput={(params) => (
             <TextField
-              id="cboClientMethodPayment"
+              id="clientMethodPayment"
               {...params}
               label="Choose one:"
               variant="outlined"
             />
           )}
         />
-
-        <input
-          type="text"
-          id="clientMethodPayment"
-          ref={clientMethodPaymentRef}
-        />
-        {!formInputsValidity.clientMethodPayment && (
-          <p>Please choose a valid payment method</p>
-        )}
       </div>
       <div className={classes.actions}>
         <button type="button" onClick={props.onCancel}>
