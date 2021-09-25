@@ -27,7 +27,8 @@ const Cart = (props) => {
 
   const submitOrderHandler = async (userData) => {
     setIsSubmitting(true);
-    await fetch("https://movieserp-default-rtdb.firebaseio.com/orders.json", {
+    //await fetch("https://movieserp-default-rtdb.firebaseio.com/orders.json", {
+    await fetch("http://localhost:8080/api/orders", {      
       method: "POST",
       BODY: JSON.stringify({
         user: userData,
