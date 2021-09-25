@@ -6,10 +6,21 @@ import CartContext from "../store/cart-context";
 import Checkout from "./Checkout";
 
 const Cart = (props) => {
+  const pruebaData = {
+    "ordersDate": "12-03-1979",
+    "ordersStatus": "ON KITCHEN",
+    "ordersDeliveryAddress": "CIUDAD DE MEXICO",
+    "id_product": 11,    
+    "product_quantity": 1,        
+    "product_price": 23.20,        
+    "id_payment": 1,        
+    "id_user": 1
+  };
   const [isCheckout, setIsCheckout] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [didSubmit, setDidSubmit] = useState(false);
   const cartCtx = useContext(CartContext);
+
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
 
@@ -18,7 +29,7 @@ const Cart = (props) => {
   };
 
   const cartItemAddHandler = (item) => {
-    cartCtx.addItem({ ...item, amount: 1 });
+    cartCtx.addItem({...item, amount: 1});
   };
 
   const orderHandler = () => {
@@ -26,14 +37,19 @@ const Cart = (props) => {
   };
 
   const submitOrderHandler = async (userData) => {
+    console.log(JSON.stringify(pruebaData, null, 2));
     setIsSubmitting(true);
     //await fetch("https://movieserp-default-rtdb.firebaseio.com/orders.json", {
     await fetch("http://localhost:8080/api/orders", {      
       method: "POST",
+      headers: {'Access-Control-Allow-Origin': '*'}, //para localhost 
+      BODY: JSON.stringify(pruebaData, null, 2),
+      /* headers: {'Access-Control-Allow-Origin': "https://movieserp-default-rtdb.firebaseio.com/orders.json"},
       BODY: JSON.stringify({
         user: userData,
         orderedItems: cartCtx.items,
       }),
+      */
     });
     setIsSubmitting(false);
     setDidSubmit(true);

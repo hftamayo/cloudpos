@@ -12,35 +12,35 @@ const Checkout = (props) => {
   const [formInputsValidity, setFormInputsValidity] = useState({
     clientName: true,
     clientCellPhone: true,
-    clientDelivAddress: true,
+    ordersDeliveryAddress: true,
   });
 
   //estos objetos sirven para no capturar todos los keystrokes durante dataInput
   const clientNameRef = useRef();
   const clientCellPhoneRef = useRef();
-  const clientDelivAddressRef = useRef();
+  const ordersDeliveryAddressRef = useRef();
 
   const ConfirmHandler = (event) => {
     event.preventDefault();
 
     const enteredName = clientNameRef.current.value;
     const enteredCellPhone = clientCellPhoneRef.current.value;
-    const enteredDelivAddress = clientDelivAddressRef.current.value;
+    const enteredOrdersDeliveryAddress = ordersDeliveryAddressRef.current.value;
 
     const enteredNameIsValid = !isEmpty(enteredName);
     const enteredCellPhoneIsValid = !isNotNineChars(enteredCellPhone);
-    const enteredDelivAddressIsValid = !isEmpty(enteredDelivAddress);
+    const enteredOrdersDeliveryAddressIsValid = !isEmpty(enteredOrdersDeliveryAddress);
 
     setFormInputsValidity({
       clientName: enteredNameIsValid,
       clientCellPhone: enteredCellPhoneIsValid,
-      clientDelivAddress: enteredDelivAddressIsValid,
+      ordersDeliveryAddress: enteredOrdersDeliveryAddressIsValid,
     });
 
     const formIsValid =
       enteredNameIsValid &&
       enteredCellPhoneIsValid &&
-      enteredDelivAddressIsValid;
+      enteredOrdersDeliveryAddressIsValid;
 
     if (!formIsValid) {
       return;
@@ -49,7 +49,7 @@ const Checkout = (props) => {
     props.onConfirm({
       clientName: enteredName,
       clientCellPhone: enteredCellPhone,
-      clientDelivAddress: enteredDelivAddress,
+      ordersDeliveryAddress: enteredOrdersDeliveryAddress,
     });
   };
 
@@ -60,7 +60,7 @@ const Checkout = (props) => {
     formInputsValidity.clientCellPhone ? "" : classes.invalid
   }`;
   const delivAddressControlClasses = `${classes.control} ${
-    formInputsValidity.clientDelivAddress ? "" : classes.invalid
+    formInputsValidity.ordersDeliveryAddress ? "" : classes.invalid
   }`;
 
   return (
@@ -90,13 +90,13 @@ const Checkout = (props) => {
         )}
       </div>
       <div className={delivAddressControlClasses}>
-        <label htmlFor="clientDelivAddress">Delivery Address *</label>
+        <label htmlFor="ordersDeliveryAddress">Delivery Address *</label>
         <input
           type="text"
-          id="clientDelivAddress"
-          ref={clientDelivAddressRef}
+          id="ordersDeliveryAddress"
+          ref={ordersDeliveryAddressRef}
         />
-        {!formInputsValidity.clientDelivAddress && (
+        {!formInputsValidity.ordersDeliveryAddress && (
           <p>Please Enter a valid address</p>
         )}
       </div>
