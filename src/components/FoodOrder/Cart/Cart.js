@@ -7,14 +7,11 @@ import Checkout from "./Checkout";
 
 const Cart = (props) => {
   const pruebaData = {
-    "ordersDate": "12-03-1979",
+    "ordersDate": "26-09-2021",
     "ordersStatus": "ON KITCHEN",
-    "ordersDeliveryAddress": "CIUDAD DE MEXICO",
-    "id_product": 11,    
-    "product_quantity": 1,        
-    "product_price": 23.20,        
-    "id_payment": 1,        
-    "id_user": 1
+    "ordersDelivaddress": "Comunidad El Pino",
+    "idPayment": "1",        
+    "idUser": "1"
   };
   const [isCheckout, setIsCheckout] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,13 +34,17 @@ const Cart = (props) => {
   };
 
   const submitOrderHandler = async (userData) => {
-    console.log(JSON.stringify(pruebaData, null, 2));
     setIsSubmitting(true);
     //await fetch("https://movieserp-default-rtdb.firebaseio.com/orders.json", {
-    await fetch("http://localhost:8080/api/orders", {      
+    await fetch("http://localhost:8080/api/orders", {  
+      credentials: "include",    
       method: "POST",
-      headers: {'Access-Control-Allow-Origin': '*'}, //para localhost 
-      BODY: JSON.stringify(pruebaData, null, 2),
+      body: JSON.stringify(pruebaData),
+      headers: {
+        'Content-Type': 'application/json',
+//        'Access-Control-Allow-Origin': '*',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBmYWtlbWFpbC5jb20iLCJleHAiOjE2MzI3NTAzODYsImlhdCI6MTYzMjcxNDM4Nn0.2tvdnG9B0HdpUpV0xsOKKaATFkyuNVKMpzYE8sXBFtw',
+      }
       /* headers: {'Access-Control-Allow-Origin': "https://movieserp-default-rtdb.firebaseio.com/orders.json"},
       BODY: JSON.stringify({
         user: userData,
