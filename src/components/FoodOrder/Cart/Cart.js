@@ -43,7 +43,7 @@ const Cart = (props) => {
       headers: {
         'Content-Type': 'application/json',
 //        'Access-Control-Allow-Origin': '*',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBmYWtlbWFpbC5jb20iLCJleHAiOjE2MzI3NTAzODYsImlhdCI6MTYzMjcxNDM4Nn0.2tvdnG9B0HdpUpV0xsOKKaATFkyuNVKMpzYE8sXBFtw',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBmYWtlbWFpbC5jb20iLCJleHAiOjE2MzI4MDA5ODMsImlhdCI6MTYzMjc2NDk4M30.iD-bdkyisxc0t6oBhS10rJjpu32IXlf6A923Iy8d-1Q',
       }
       /* headers: {'Access-Control-Allow-Origin': "https://movieserp-default-rtdb.firebaseio.com/orders.json"},
       BODY: JSON.stringify({
